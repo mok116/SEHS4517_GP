@@ -104,7 +104,7 @@ class Movie extends Database
         $sql = "INSERT INTO `reservation`(`customer_id`, `movie_theatre_id`, `total_amount`, `created_at`) VALUES (:customer_id, :movie_theatre_id, :total_amount, NOW())";
 
         // prepare data
-        $totalAmount = $data["price"]*count($data["seat_id"];
+        $totalAmount = $data["price"]*count($data["seat_id"]);
         $movieTheatreId = $data["movie_theatre_id"];
         $customerId = $data["customer_id"];
 
@@ -148,6 +148,12 @@ class Movie extends Database
         // set data into $result
         $result["success"] = true;
         $result["message"] = "Reservation Success. You can enjoy the movie now.";
+
+        // Start Session
+        if(session_id() == '')  
+        {
+            session_start();
+        }
 
         // prepare data for node.js
         $result["order"] = array(
