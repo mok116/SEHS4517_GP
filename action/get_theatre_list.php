@@ -17,7 +17,6 @@ if($_SERVER['REQUEST_METHOD'] === "POST")
         foreach ($result["message"] as $row) 
         {
             // movie id as key
-
             if(!isset($data[$row["id"]]))
             {
                 $data[$row["id"]] = array(
@@ -27,6 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST")
                 );
             }
 
+            // restructure the data
             $data[$row["id"]]["timeslot"][] = array(
                 "movie_theatre_id" => $row["movie_theatre_id"],
                 "start_time" => $row["start_time"],
