@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Route to handle reservation data
-app.get('/success', (req, res) => {
+app.post('/success', (req, res) => {
     const { customer_email_address, customer_name, order_number, start_time, total_amount, reservation_item } = req.body;
 
     // Render the success with the reservation details
