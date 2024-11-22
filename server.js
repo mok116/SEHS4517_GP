@@ -9,12 +9,14 @@ const PORT = 8080;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(__dirname))
+
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Route to handle reservation data
-app.post('/success', (req, res) => {
+app.get('/success', (req, res) => {
     const { customer_email_address, customer_name, order_number, start_time, total_amount, reservation_item } = req.body;
 
     // Render the success with the reservation details
