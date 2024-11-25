@@ -273,7 +273,7 @@
                 type: "POST",
                 data: data,
                 dataType: 'json',
-                beforeSend: function(responses) {
+                beforeSend: function() {
 
                     // display spinner before form submit complete
                     common.spinnerLoader(true, member._loginForm);
@@ -545,7 +545,7 @@
                 type: "POST",
                 data: data,
                 dataType: 'json',
-                beforeSend: function(responses) {
+                beforeSend: function() {
 
                     // display spinner before form submit complete
                     common.spinnerLoader(true, reservation._reservationForm);
