@@ -451,6 +451,7 @@
                     $("#movie-timeslot").append('<option selected disabled value="">Please Choose Time Slot</option>');
 
                     // reset <select> of seating plan
+                    $(".seating-plan-cinema").html("");
                     $("#movie-seat").html("");
                     $("#movie-seat").append('<option selected disabled value="">Please Choose Seat</option>');
 
@@ -500,14 +501,29 @@
                     {
                         var dbData = responses.message;
 
-                        // loop the seating plan data
+                        // define array for seating plan for display in frontend
+                        var seats = [];
+
+                        // loop the seating plan data for select options
                         $.each(dbData, function(index, item) {
+
+                            // Initialize the array for the line if it doesn't exist
+                            if (!seats[item.line]) 
+                            {
+                                seats[item.line] = [];
+                            }
 
                             var disabled = false;
                             if(item.reservation_id)
                             {
                                 // if the seat is ordered by other customers, will disable this option
                                 disabled = true;
+
+                                seats[item.line].push([item.column, "reserved"]);
+                            }
+                            else
+                            {
+                                seats[item.line].push([item.column, "available"]);
                             }
 
                             // paste the options of seating plan into <select> for reservation form
@@ -517,6 +533,29 @@
                                 disabled : disabled,
                             }));
                         });
+
+                        var seatingPlan = '<div class="seating-plan-screen">Screen</div>';
+
+                        // loop the seating plan data for displaying frontend
+                        const lines = Object.keys(seats); // Get the lines (keys of the object)
+                        for (let i = 0; i < lines.length; i++) 
+                        {
+                            seatingPlan += '<div class="seating-plan-row">';
+
+                            const line = lines[i];
+                            const columns = seats[line];
+                            for (let j = 0; j < columns.length; j++) 
+                            {
+                                const column = columns[j];
+                                var seatNum = column[0];
+                                var status = column[1];
+                                seatingPlan += '<div class="seating-plan-seat '+status+'" data-seat="'+line+seatNum+'">'+line+seatNum+'</div>';
+                            }
+
+                            seatingPlan += '</div>';
+                        }
+
+                        $(".seating-plan-cinema").html(seatingPlan);
 
                         // after the options of seating plan ready, enable this <select>, reservation form is ready for submit now
                         $("#movie-seat").prop('disabled', false);

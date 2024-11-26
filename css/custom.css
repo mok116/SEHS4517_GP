@@ -177,3 +177,46 @@
 {
     color: #00668f;
 }
+
+.seating-plan
+{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.seating-plan-screen {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.seating-plan-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.seating-plan-seat {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    background-color: #8BC34A; /* Green for available seats */
+    border: 1px solid #666;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.seating-plan-seat:hover {
+    background-color: #7CB342; /* Darker green on hover */
+}
+
+.seating-plan-seat.reserved {
+    background-color: #F44336; /* Red for reserved seats */
+    cursor: not-allowed;
+}
+
+.seating-plan-seat.available:active {
+    background-color: #388E3C; /* Even darker green when clicked */
+}
