@@ -9,7 +9,12 @@ const PORT = 8080;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname))
+app.use(express.static(path.join(__dirname, "public")));
+
+// all nodejs get request will redirect to apache homepage
+app.get('*', (req, res) => {
+    res.redirect('http://localhost/SEHS4517_GP/'); // Change '/other-page.html' to your desired destination
+});
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
