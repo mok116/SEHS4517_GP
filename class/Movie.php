@@ -76,6 +76,7 @@ class Movie extends Database
         LEFT JOIN reservation_item ri ON ri.seat_id = s.id 
         LEFT JOIN reservation r ON r.id = ri.reservation_id AND r.movie_theatre_id = mt.id
         WHERE mt.id = :id
+        GROUP BY mt.id, mt.start_time, s.id, s.line, s.column
         ORDER BY s.id ASC
         ";
         $dbData = parent::fetchAll($sql, array("id" => $movieTheatreId));
