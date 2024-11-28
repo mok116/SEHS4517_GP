@@ -729,6 +729,14 @@
                                                 });
 
                                                 historyHtml += '<li class="list-group-item"><strong>Seats:</strong> '+seats.join(", ")+'</li>';
+                                                historyHtml += '<li class="list-group-item">';
+
+                                                // QR code button
+                                                historyHtml += '<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ticketSample">';
+                                                historyHtml += 'QR Code Ticket';
+                                                historyHtml += '</button>';
+
+                                                historyHtml += '</li>';
 
                                                 historyHtml += '</ul>';
                                                 historyHtml += '</div>';

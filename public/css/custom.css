@@ -168,7 +168,7 @@
     padding-top: 20px;
 }
 
-.movie-section .movie-cover-image img
+.movie-section .movie-cover-image img, .modal img
 {
     max-width: 100%;
 }
