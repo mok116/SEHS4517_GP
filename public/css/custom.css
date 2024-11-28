@@ -103,7 +103,7 @@
     background-color: #fff;
 }
 
-.feature-section, .experience-section, .discover-section, .footer-section, .movie-section, .register-section, .login-section, .reservation-section
+.feature-section, .experience-section, .discover-section, .footer-section, .movie-section, .register-section, .login-section, .reservation-section, .reservation-history-section
 {
     background-color: #fff;
     color: #000;
@@ -184,20 +184,23 @@
     text-align: center;
 }
 
-.seating-plan-screen {
+.seating-plan-screen 
+{
     background-color: #333;
     color: white;
     padding: 20px;
     margin-bottom: 20px;
 }
 
-.seating-plan-row {
+.seating-plan-row 
+{
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
 }
 
-.seating-plan-seat {
+.seating-plan-seat 
+{
     width: 40px;
     height: 40px;
     margin: 5px;
@@ -208,15 +211,29 @@
     position: relative;
 }
 
-.seating-plan-seat:hover {
+.seating-plan-seat:hover 
+{
     background-color: #7CB342; /* Darker green on hover */
 }
 
-.seating-plan-seat.reserved {
+.seating-plan-seat.reserved 
+{
     background-color: #F44336; /* Red for reserved seats */
     cursor: not-allowed;
 }
 
-.seating-plan-seat.available:active {
+.seating-plan-seat.available:active 
+{
     background-color: #388E3C; /* Even darker green when clicked */
+}
+
+.reservation-history-section .reservation-row
+{
+    width: 100%;
+}
+
+.reservation-history-section .reservation-row .reservation-head
+{
+    border-radius: unset;
+    width: 100%;
 }

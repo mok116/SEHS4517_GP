@@ -188,4 +188,37 @@ class Movie extends Database
 
         return $result;
     }
+
+    /**
+     * get all reserve record by customer id
+     * @param  array   $customerId   customer id
+     * @return array   $result       message
+     */
+    public function getReservationHistoryList($customerId)
+    {
+        // preset result data
+        $result = array(
+            "success" => false,
+            "message" => "",
+        );
+
+        // select all reserve record by customer id, include those seat which ordered before
+        $sql = "SELECT r.id, r.customer_id, r.order_number, r.total_amount, r.created_at, s.line, s.column, mt.start_time, m.name AS movie_name, t.name  AS theatre_name 
+        FROM `reservation` r 
+        JOIN reservation_item ri ON r.id = ri.reservation_id
+        JOIN seat s ON s.id = ri.seat_id
+        JOIN movie_theatre mt ON mt.id = r.movie_theatre_id 
+        JOIN movie m ON m.id = mt.movie_id 
+        JOIN theatre t ON t.id = mt.theatre_id
+        WHERE r.customer_id = :customer_id
+        ORDER BY r.id DESC, s.id ASC
+        ";
+        $dbData = parent::fetchAll($sql, array("customer_id" => $customerId));
+
+        // set data into $result
+        $result["success"] = true;
+        $result["message"] = $dbData;
+
+        return $result;
+    }
 }

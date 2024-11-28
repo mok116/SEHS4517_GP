@@ -679,6 +679,71 @@
                         {
                             location.href="reservation.html";
                         }
+
+                        // if customer stay on index page, show the reserve history
+                        if($(".index-page").length > 0) {
+
+                            var data = {
+                                action: "customer_reservation",
+                            };
+                            
+                            // use ajax http request
+                            $.ajax({
+                                type: "POST",
+                                dataType: "json",
+                                url: 'action/check_customer_reservation.php',
+                                data: data,
+                                success: function (responses) {
+
+                                    if(responses.success)
+                                    {
+                                        var dbData = responses.message;
+
+                                        // if have record
+                                        if(Object.keys(dbData).length > 0)
+                                        {
+                                            var historyHtml = '<div class="container">';
+                                            historyHtml += '<h1 class="text-center">';
+                                            historyHtml += '<strong>Reservation History</strong>';
+                                            historyHtml += '</h1>';
+
+                                            // loop the record to build html
+                                            $.each(dbData, function(index, item) {
+
+                                                historyHtml += '<p class="reservation-row">';
+                                                historyHtml += '<a class="btn btn-light reservation-head text-start" data-bs-toggle="collapse" href="#'+item.order_number+'" role="button" aria-expanded="false" aria-controls="'+item.order_number+'">';
+                                                historyHtml += item.order_number;
+                                                historyHtml += '</a>';
+                                                historyHtml += '<div class="collapse" id="'+item.order_number+'">';
+                                                historyHtml += '<div class="card card-body">';
+                                                historyHtml += '<ul class="list-group list-group-flush">';
+                                                historyHtml += '<li class="list-group-item"><strong>Order Number:</strong> '+item.order_number+'</li>';
+                                                historyHtml += '<li class="list-group-item"><strong>Movie Time:</strong> '+item.start_time+'</li>';
+                                                historyHtml += '<li class="list-group-item"><strong>Movie Name:</strong> '+item.movie_name+'</li>';
+                                                historyHtml += '<li class="list-group-item"><strong>Theatre Name:</strong> '+item.theatre_name+'</li>';
+
+                                                var seats = [];
+                                                $.each(item.seats, function(index, seat) {
+                                                    
+                                                    seats.push(seat);
+                                                });
+
+                                                historyHtml += '<li class="list-group-item"><strong>Seats:</strong> '+seats.join(", ")+'</li>';
+
+                                                historyHtml += '</ul>';
+                                                historyHtml += '</div>';
+                                            });
+
+                                            historyHtml += '</div>';
+
+                                            $(".reservation-history-section").html(historyHtml);
+                                            
+                                            $(".reservation-history-section").show();
+                                        }
+                                    }
+                                },
+                            });
+                        }
                     }
                     else
                     {
