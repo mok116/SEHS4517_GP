@@ -87,7 +87,7 @@ class Member extends Database
         else
         {
             // customer data not exist
-            $result["message"] = "Login Fail: Account Exist, you can go back to Home Page";
+            $result["message"] = "Login Fail: Account Not Exist, you can go back to Home Page";
         }
 
         return $result;
