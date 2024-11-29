@@ -22,9 +22,9 @@ b. File Structure
 
 1. action - the path when form submit
 2. class  - PHP OOP coding to connect DB, create, update, select query
-3. css    - external css files for web pages
-4. images - web pages images files
-5. js     - external js files for web pages, mainly jQuery + Ajax
+3. public/css    - external css files for web pages
+4. public/images - web pages images files
+5. public/js     - external js files for web pages, mainly jQuery + Ajax
 6. mysql  - mysql query statement file
 7. views  - Node.js EJS template files
 
